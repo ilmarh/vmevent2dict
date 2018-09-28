@@ -94,7 +94,7 @@ if __name__ == '__main__':
             event = event_collector.latestPage[0]
             if last_event_key != event.key:
                 name, jdata = event2nameval(event)
-                print("Event repr:\n{}\n-------------Event dict():\n{}\n-------------Event json:{}\n".format((json.dumps(jdata) + '\n').encode('utf-8')))
+                print("Event repr:\n{}\n-------------Event dict():\n{}\n-------------Event json:{}\n".format(event, jdata, (json.dumps(jdata) + '\n').encode('utf-8')))
                 last_event_key = event.key
             sleep(float(VCENTER_INTERVAL))
 
