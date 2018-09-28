@@ -40,10 +40,14 @@ def event2nameval(val, info=Object(name="", type=object, flags=0), indent=0):
         if val:
             item = Object(name="", type=itemType, flags=info.flags)
             result = {}
+            name_count=1
             for obj in val:
                 res_name,res_val = event2nameval(obj, item, indent+1)
                 # if res2 is not {}
                 if res_val:
+                    if res_name == '':
+                    res_name = "data{}".format(name_count)
+                    name_count=name_count+1
                     result.update({res_name: res_val})
         else:
             result = None
