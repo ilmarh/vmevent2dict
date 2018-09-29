@@ -94,12 +94,16 @@ if __name__ == '__main__':
 
     while True:
         try:
-            # New events will be inserted at the first element in the collector.latestPage list
-            event = event_collector.latestPage[0]
-            if last_event_key != event.key:
-                name, jdata = event2nameval(event)
-                print("Event repr:\n{}\n-------------\nEvent dict():\n{}\n-------------\nEvent json:{}\n".format(event, jdata, (json.dumps(jdata) + '\n').encode('utf-8')))
-                last_event_key = event.key
+            events = event_collector.latestPage
+            border_key = events[0].key
+            if last_event_key != border_key:
+                for event in events:
+                    if last_event_key != event.key:
+                        name, jdata = event2nameval(event)
+                        print("Event repr:\n{}\n-------------\nEvent dict():\n{}\n-------------\nEvent json:{}\n".format(event, jdata, (json.dumps(jdata) + '\n').encode('utf-8')))
+                    else:
+                        break
+                last_event_key = border_key
             sleep(float(VCENTER_INTERVAL))
 
         except:
